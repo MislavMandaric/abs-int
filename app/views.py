@@ -82,6 +82,6 @@ class DiscountListView(ListView):
 
 class TagsView(View):
     def get(self, *args, **kwargs):
-        tags = Tag.object.all()
+        tags = Tag.objects.all()
         data = serializers.serialize('json', tags)
         return HttpResponse(data, mimetype='application/json')
