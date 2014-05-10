@@ -17,7 +17,8 @@
                 {{ bound_field }}
             </div>
         {% endfor %}-->
-        <form class="form-signin" role="form">
+        <form class="form-signin" role="form" method="POST">
+            {% csrf_token %}
         <h2 class="form-signin-heading">Prijava</h2>
         <input type="text" class="form-control"  id="id_username" name="username" placeholder="Korisničko ime" required autofocus>
         <input type="password" class="form-control" id="id_password" name="password" placeholder="Lozinka" required>
