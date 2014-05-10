@@ -49,3 +49,5 @@ class RegistrationForm(forms.Form):
   image = FileField(label="Avatar", required=False)
 
 
+class DiscountForm(forms.Form):
+	text = CharField(widget=Textarea(attrs={'class':'form-control'}), label="Poruka")
