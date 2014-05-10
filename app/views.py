@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import View, TemplateView, CreateView, DetailView, ListView
+from django.views.generic import View, TemplateView, CreateView, ListView
+from django.views.generic.detail import DetailView
 
 from .models import *
 
@@ -32,6 +33,15 @@ class LogoutView(View):
 
 # ----- recepti -----
 
+class RecipesView(TemplateView):
+	template_name = 'recipes.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(RecipesView, self).get_context_data(**kwargs)
+		context['proba'] = [i for i in range(20)]
+		return context
+
+
 class RecipeCreateView(CreateView):
 	template_name = "recipe_create.html"
 	# model = Recipe
@@ -42,6 +52,7 @@ class RecipeDetailViewv(DetailView):
 
 class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
+	object_list = range(20)
 	# model = Recipe
 
 # ----- akcije -----
@@ -54,3 +65,9 @@ class DiscountListView(ListView):
 	template_name = "discount_list.html"
 	# model = Discount
 
+class TagsView(TemplateView):
+	template_name = "tags.html"
+
+	def render_to_response(self, context, **response_kwargs):
+		context['']
+		return super(TagsView, self).render_to_response(context, **response_kwargs)

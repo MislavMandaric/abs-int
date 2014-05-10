@@ -37,3 +37,9 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+/* recipes */
+
+.recipe-box{
+  text-align: center;
+}
