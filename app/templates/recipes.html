@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}Home{% endblock %}
+{% block body %}
+	{% for recipe in recipes %}
+		{% if forloop.counter|divisible_by:"3"  %}
+			<div class="row">
+				<div class="col-md-4">
+					recept
+				</div>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endblock %}
