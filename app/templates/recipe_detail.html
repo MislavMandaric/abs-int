@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_title %}{{ recipe.title }}{% endblock %}
-{% block page_header %}{{ recipe.title }}{% endblock %}
+{% block page_header %}{{ recipe.title }}<small> Autor: {{ recipe.user }}</small>{% endblock %}
 {% block page_body %}
 	<div class="row">
-		slika
-	</div>
-	<div class="row">
-		tekst, lajk
+		<div class="col-md-4">
+			<img src="{{ recipe.image.url }}" class="img-rounded"/>
+		</div>
+		<div class="col-md-8">
+			<div class="panel panel-default">
+			  <div class="panel-body">
+					{{ recipe.title }}
+			  </div>
+			</div>
+		</div>
 	</div>
 {% endblock %}
