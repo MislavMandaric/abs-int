@@ -26,6 +26,16 @@ class Recipe(models.Model):
     def __unicode__(self):
         return self.title
 
+class Discount(models.Model):
+    text = models.TextField(blank=False, max_length=200)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
+
+    class Meta:
+        ordering = ['date']
+
+    def __unicode__(self):
+        return self.title
+
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True, blank=False)
 
