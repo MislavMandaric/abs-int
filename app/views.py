@@ -56,6 +56,16 @@ class RecipeDetailView(DetailView):
 	template_name = "recipe_detail.html"
 	model = Recipe
 
+	def get_context_data(self, **kwargs):
+		context = super(RecipeDetailView, self).get_context_data(**kwargs)
+		pk = self.kwargs['pk']
+		tags = Tag.objects.filter(tag_recipes__recipe=pk)
+		context['tags'] = tags
+		categories = Category.objects.filter(category_recipes__recipe=pk)
+		context['categories'] = categories
+		return context
+
+
 class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
 	model = Recipe

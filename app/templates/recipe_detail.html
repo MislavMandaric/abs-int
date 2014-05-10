@@ -15,12 +15,20 @@
 			  			<div class="well well-sm">Objavljeno: {{ recipe.date|date:"d.m.Y." }} u {{ recipe.date|time:"H:i" }}</div>
 			  		</div>
 			  	</div>
-					{{ recipe.title }}
+					{{ recipe.text }}
 			  </div>
 			</div>
 			<ul class="list-group">
-			  <li class="list-group-item">Tagovi: <span class="label label-danger">Danger</span></li>
-			  <li class="list-group-item">Kategorije: <span class="label label-warning">Danger</span></li>
+			  <li class="list-group-item">Tagovi: 
+			  	{% for t in tags %}
+			  		<span class="label label-danger">{{t.name}}</span>
+			  	{% endfor %}
+			  	</li>
+			  <li class="list-group-item">Kategorije: 
+			  	{% for c in categories %}
+			  		<span class="label label-warning">{{c.name}}</span>
+			  	{% endfor %}
+			  </li>
 			</ul>
 		</div>
 	</div>

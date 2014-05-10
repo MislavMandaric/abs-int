@@ -28,12 +28,14 @@
 				<div class="row">
 			{% endif %}
 			<div class="col-md-4 recipe-box">
+				<a href="{% url 'recipe_detail' recipe.id %}">
 				<div class="panel panel-default">
 	  			<div class="panel-body">
 	  				<img src="{{ recipe.image.url }}" class="img-rounded" width="250" height="250"/>
 				  </div>
 				  <div class="panel-footer">{{ recipe.title }}</div>
 				</div>
+			</a>
 			</div>
 			{% if forloop.counter|divisibleby:"3" %}
 				</div>
