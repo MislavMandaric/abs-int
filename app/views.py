@@ -1,8 +1,9 @@
+from django.core import serializers
+from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, CreateView, ListView
 from django.views.generic.detail import DetailView
-from django.core import serializers
 
 from .models import *
 from .forms import SearchForm
@@ -57,7 +58,16 @@ class RecipeSearchView(ListView):
 	
 	def get_queryset(self):
 		queryset = Recipe.objects.all()
-		#filtriranje
+		categories = self.request.GET.get('categories', [])
+
+		filters = Q()
+
+		tags = self.request.GET.get('tags', '')
+		if tags:
+			tags_list = tags.split(', ')
+			for tag in tags_list:
+				filters |= Q(tags__name__icontains=tag)
+
 		return queryset
 
 	def get_context_data(self, **kwargs):

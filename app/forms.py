@@ -22,7 +22,7 @@ class SearchForm(forms.Form):
 		OPTIONS = [('none', '')]
 		for c in categories:
 			OPTIONS.append((c.name, c.name))
-		self.fields[c.name] = MultipleChoiceField(widget=forms.SelectMultiple, choices=OPTIONS, label="Kategorija")
+		self.fields['categories'] = MultipleChoiceField(widget=forms.SelectMultiple, choices=OPTIONS, label="Kategorija")
 
 
 
