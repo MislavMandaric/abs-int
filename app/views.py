@@ -121,16 +121,16 @@ class DiscountListView(ListView):
 		return context
 
 class TagsView(View):
-    def get(self, *args, **kwargs):
-        tags = Tag.objects.all()
-        data = serializers.serialize('json', tags)
-        return HttpResponse(data, mimetype='application/json')
+	def get(self, *args, **kwargs):
+		tags = Tag.objects.all()
+		data = serializers.serialize('json', tags)
+		return HttpResponse(data, mimetype='application/json')
 
 class MoreRecipesView(TemplateView):
 	template_name = "more_recipes.html"
 
 	def get_context_data(self, **kwargs):
-		current_page = self.request.GET.get('page', 1)
+		current_page = int(self.request.GET.get('page', 1))
 
 		context = super(MoreRecipesView, self).get_context_data(**kwargs)
 		recepies = Recipe.objects.all().order_by('-date')
@@ -147,4 +147,5 @@ class MoreRecipesView(TemplateView):
 
 		context['recipes'] = recepies[limit_from:limit_to]
 		context['more'] = more
+		context['page'] = current_page + 1
 		return context
