@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load thumbnail %}
 {% block page_title %}Pretraga{% endblock %}
 {% block page_header %}Pretraga recepata{% endblock %}
 {% block page_body %}
@@ -31,7 +32,9 @@
 				<a href="{% url 'recipe_detail' recipe.id %}">
 				<div class="panel panel-default">
 	  			<div class="panel-body">
-	  				<img src="{{ recipe.image.url }}" class="img-rounded" width="250" height="250"/>
+	  				{% thumbnail recipe.image "250x250" as im %}
+			        <img src="{{ im.url }}" class="img-rounded"/>
+			      {% endthumbnail %}
 				  </div>
 				  <div class="panel-footer">{{ recipe.title }}</div>
 				</div>

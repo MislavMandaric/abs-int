@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
-{% block page_title %}profil{{ username }}{% endblock %}
-{% block page_header %}<img src="{{ user.image.url }}" class="img-rounded" width="100" height="100"/><small>{{ user }}</small>{% endblock %}
+{% load thumbnail %}
+{% block page_title %}{{ user }}{% endblock %}
+{% block page_header %}
+	{% thumbnail user.image "100x100" as im %}
+	<img src="{{ im.url }}" class="img-rounded"/>
+	{% endthumbnail %}
+	<small>{{ user }}</small>
+{% endblock %}
 {% block page_body %}
 	<ul class="nav nav-tabs">
         <li class="active"><a href="#recepti" data-toggle="tab">Recepti</a></li>

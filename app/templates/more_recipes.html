@@ -1,3 +1,4 @@
+{% load thumbnail %}
 {% for recipe in recipes %}
 		{% if forloop.counter0|divisibleby:3 %}
 			<div class="row">
@@ -6,7 +7,9 @@
 			<a href="{% url 'recipe_detail' recipe.id %}">
 			<div class="panel panel-default">
   			<div class="panel-body">
-	  			<img src="{{ recipe.image.url }}" class="img-rounded" width="250" height="250"/>
+	  				{% thumbnail recipe.image "250x250" as im %}
+			        <img src="{{ im.url }}" class="img-rounded"/>
+			      {% endthumbnail %}
 			</div>
 			<div class="panel-footer">{{ recipe.title }}</div>
 			</div>

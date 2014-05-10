@@ -30,6 +30,9 @@ class ProfileView(DetailView):
 	template_name = "profile.html"
 	model = CustomUser
 
+	def get_object(self, queryset=None):
+		return self.request.user
+
 # ----- recepti -----
 
 class RecipesView(TemplateView):

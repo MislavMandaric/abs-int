@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load thumbnail %}
 {% block page_title %}{{ recipe.title }}{% endblock %}
 {% block page_header %}{{ recipe.title }}<small> Autor: {{ recipe.user }}</small>{% endblock %}
 {% block page_body %}
 	<div class="row">
 		<div class="col-md-4">
-			<img src="{{ recipe.image.url }}" class="img-rounded"/>
+			{% thumbnail recipe.image "300x300" as im %}
+        <img src="{{ im.url }}" class="img-rounded"/>
+      {% endthumbnail %}
 		</div>
 		<div class="col-md-8">
 			<div class="panel panel-default">
