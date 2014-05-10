@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 	
 
 	url(r'^popusti', DiscountListView.as_view(), name="discount_list"),
-	url(r'^akcije/(?P<id>[0-9]+)/$', DiscountCreateView.as_view(), name="discount_create"),
+	url(r'^akcije/dodaj-novu', DiscountCreateView.as_view(), name="discount_create"),
 
 	url(r'^tagovi', TagsView.as_view(), name="tagovi"),
 	url(r'^$', Index.as_view(), name="index"),
