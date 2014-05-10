@@ -26,9 +26,18 @@ class Recipe(models.Model):
     def __unicode__(self):
         return self.title
 
+    def like_recipe(recipe, user):
+        try:
+            UserRecipe.objects.get(user=user, recipe=recipe)
+        except:
+            # like još ne postoji
+            ur = UserRecipe(user=user, recipe=recipe)
+            ur.save()
+
 class Discount(models.Model):
     text = models.TextField(blank=False, max_length=200)
     date = models.DateTimeField(auto_now_add=True, editable=False)
+    user = models.ForeignKey(CustomUser, related_name='discounts')
 
     class Meta:
         ordering = ['date']
@@ -55,13 +64,22 @@ class Tag(models.Model):
         return self.name
 
 class UserRecipe(models.Model):
-    users = models.ForeignKey(CustomUser)
+    user = models.ForeignKey(CustomUser)
     recipes = models.ForeignKey(Recipe)
+
+    def save(self, *args, **kwargs):
+        super(UserRecipe, self).save(*args, **kwargs)
+        # update broja glasova u modelu Recipe
+        likes = UserRecipe.objects.filter(recipe__id=self.recipe.id)
+        rp = Recipe.objects.get(id=self.id)
+        rp.likes = likes.count()
+        rp.save()
+        
 
 class RecipeCategory(models.Model):
-    recipes = models.ForeignKey(Recipe)
-    categories = models.ForeignKey(Category)
+    recipe = models.ForeignKey(Recipe)
+    categorie = models.ForeignKey(Category)
 
 class RecipeTag(models.Model):
-    recipes = models.ForeignKey(Recipe)
-    tags = models.ForeignKey(Tag)
+    recipe = models.ForeignKey(Recipe)
+    tag = models.ForeignKey(Tag)
