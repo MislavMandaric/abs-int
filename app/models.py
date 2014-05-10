@@ -3,14 +3,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class CustomUser(User):
+class CustomUser(models.Model):
+    user = models.OneToOneField(User, primary_key=True)
     image = models.ImageField(upload_to='/avatars', null=True)
 
-    class Meta:
-        ordering = ['username']
-
     def __unicode__(self):
-        return self.username
+        return self.user.username
 
 class Recipe(models.Model):
     title = models.CharField(max_length=200, blank=False)
