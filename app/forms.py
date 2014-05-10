@@ -25,20 +25,20 @@ class SearchForm(forms.Form):
 		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control'}), \
 			choices=OPTIONS, label="Kategorija")
 
-class ReceiptForm(forms.Form):
-    title = CharField(widget=TextInput(attrs={'class':'form-control'}))
-    text = CharField(widget=Textarea(attrs={'class':'form-control'}))
-    image = FileField(widget=ClearableFileInput(attrs={'class':'form-control'}))
-    tags = CharField(widget=TextInput(attrs={'class':'form-control'}))
+class RecipeForm(forms.Form):
+	title = CharField(widget=TextInput(attrs={'class':'form-control'}))
+	text = CharField(widget=Textarea(attrs={'class':'form-control'}))
+	image = FileField(widget=ClearableFileInput(attrs={'class':'form-control'}))
+	tags = CharField(widget=TextInput(attrs={'class':'form-control'}))
 
-    def __init__(self, *args, **kw):
-        super(SearchForm, self).__init__(*args, **kw)
-        categories = Category.objects.all()
-        OPTIONS = []
-        for c in categories:
-            OPTIONS.append((c.name, c.name))
-        self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control'}), \
-            choices=OPTIONS, label="Kategorija")
+	def __init__(self, *args, **kw):
+		super(RecipeForm, self).__init__(*args, **kw)
+		categories = Category.objects.all()
+		OPTIONS = []
+		for c in categories:
+			OPTIONS.append((c.name, c.name))
+		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control'}), \
+			choices=OPTIONS, label="Kategorija")
 
 
 class RegistrationForm(forms.Form):

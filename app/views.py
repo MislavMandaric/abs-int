@@ -9,7 +9,7 @@ from django.views.generic import View, TemplateView, CreateView, ListView, FormV
 from django.views.generic.detail import DetailView
 
 from .models import *
-from .forms import SearchForm, RegistrationForm
+from .forms import SearchForm, RegistrationForm, RecipeForm
 
 class Index(TemplateView):
 	template_name = "home.html"
@@ -69,9 +69,10 @@ class RecipesView(TemplateView):
 		context['more'] = more
 		return context
 
-class RecipeCreateView(CreateView):
+class RecipeCreateView(FormView):
 	template_name = "recipe_create.html"
-	model = Recipe
+	form_class = RecipeForm
+	success_url = '/'
 
 class RecipeDetailView(DetailView):
 	template_name = "recipe_detail.html"
