@@ -9,7 +9,7 @@ from django.views.generic import View, TemplateView, CreateView, ListView, FormV
 from django.views.generic.detail import DetailView
 
 from .models import *
-from .forms import SearchForm, RegistrationForm, RecipeForm
+from .forms import SearchForm, RegistrationForm, RecipeForm, DiscountForm
 
 class Index(TemplateView):
 	template_name = "home.html"
@@ -82,7 +82,7 @@ class RecipesView(TemplateView):
 class RecipeCreateView(FormView):
 	template_name = "recipe_create.html"
 	form_class = RecipeForm
-	success_url = '/'
+	success_url = '/recepti'
 
 	def form_valid(self, form):
 		data = form.cleaned_data
@@ -177,9 +177,25 @@ class RecipeSearchView(ListView):
 
 # ----- akcije -----
 
-class DiscountCreateView(CreateView):
+class DiscountCreateView(FormView):
 	template_name = "discount_create.html"
-	# model = Discount
+	form_class = DiscountForm
+	success_url = '/akcije'
+
+	def form_valid(self, form):
+		data = form.cleaned_data
+		text = data['text']
+
+		user = self.request.user
+		custom_user = CustomUser.objects.get(user=user)
+		d = Discount(text=text, user=custom_user)
+		d.save()
+
+		return HttpResponseRedirect(self.get_success_url())
+
+	def post(self, request, *args, **kwargs):
+		self.request = request
+		return super(DiscountCreateView, self).post(request, *args, **kwargs)
 
 class DiscountListView(ListView):
 	template_name = "discount_list.html"
@@ -194,6 +210,8 @@ class DiscountListView(ListView):
 		context = super(DiscountListView, self).get_context_data(**kwargs)
 		context['discounts'] = [i for i in range(20)]
 		return context
+
+# ----- ostalo -----
 
 class TagsView(View):
 	def get(self, *args, **kwargs):
