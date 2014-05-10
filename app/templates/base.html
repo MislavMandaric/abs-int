@@ -32,7 +32,7 @@
           </ul>
 					<ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    <li><p class="navbar-text">Ulogiran kao {{ user }}</p></li>
+                    <li><p class="navbar-text">Ulogiran kao <a href="{% url 'profile' %}" class="navbar-link">{{ user }}</a></p></li>
                     <li><a href="{% url 'logout' %}">Odjava</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Prijava</a></li>
