@@ -14,8 +14,14 @@
 		<tbody>
 			{% for r in discounts %}
 				<tr height="80px">
-					<td width="80%">Tekst akcije{{ r }}</td>
-					<td>Autor:<br>Lajkovi:</td>
+					<td width="80%">Tekst akcije </td>
+					<td>
+						<br>
+						<ul class="list-group">
+						  <li class="list-group-item">Autor:</li>
+						  <li class="list-group-item"><span class="badge">6</span> lajkova</li>
+						</ul>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>

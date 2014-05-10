@@ -1,8 +1,9 @@
+from django.core import serializers
+from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, CreateView, ListView
 from django.views.generic.detail import DetailView
-from django.core import serializers
 
 from .models import *
 from .forms import SearchForm
@@ -18,7 +19,7 @@ class Index(TemplateView):
 # ----- korisnici -----
 
 class RegistrationView(TemplateView):
-	template_name = "registration.html"
+	template_name = "registration/registration.html"
 
 class ProfileView(TemplateView):
 	template_name = "profile.html"
@@ -56,13 +57,37 @@ class RecipeSearchView(ListView):
 	model = Recipe
 	
 	def get_queryset(self):
-		queryset = Recipe.objects.all()
-		#filtriranje
+		queryset = []
+		filters_categories = Q()
+
+		categories = self.request.GET.getlist('categories', [])
+		tags = self.request.GET.get('tags', '')
+
+		self.result = False
+		if categories == [] and tags == '':
+			return []
+
+		for cat in categories:
+			if cat != 'none':
+				filters_categories |= Q(recipe_categories__categorie__name__icontains=cat)	
+
+		filters_tags = Q()
+		if tags:
+			tags_list = tags.split(', ')
+			for tag in tags_list:
+				filters_tags |= Q(recipe_tags__tag__name__icontains=tag)
+
+		queryset = Recipe.objects.filter(filters_tags, filters_categories).distinct().order_by('-date')
+
+		if queryset.count() != 0:
+			self.result = True
+	
 		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(RecipeSearchView, self).get_context_data(**kwargs)
 		context['form'] = SearchForm()
+		context['result'] = self.result
 		return context
 
 # ----- akcije -----
