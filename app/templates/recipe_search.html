@@ -6,22 +6,38 @@
 	<div class="panel panel-default">
     <div class="panel-body">
         <form method="GET" class="form-inline" role="form">
-        	{% for field in form %}
+        	<div class="row">
+	        		{{ form.tags }}
+	        </div>
+	        <div class="row">
+	        		{{ form.categories }}
+	        </div>
+        	<!--{% for field in form %}
 		        <div class="form-group">
 		            {{ field.errors }}
 		            {{ field.label_tag }} {{ field }}
 		        </div>
-					{% endfor %}
+					{% endfor %}-->
 				  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></button>
 				</form>
+		</div>
 	</div>
 	{% if result %}
-	<div>
 		{% for recipe in object_list %}
-			<img src="/media/{{ recipe.image }}" alt="slika"/>
-			{{ recipe.title }}
+			{% if forloop.counter|divisibleby:"3" %}
+				<div class="row">
+			{% endif %}
+			<div class="col-md-4 recipe-box">
+				<div class="panel panel-default">
+	  			<div class="panel-body">
+	  				<img src="{{ recipe.image.url }}" class="img-rounded" />
+				  </div>
+				  <div class="panel-footer">{{ recipe.title }}</div>
+				</div>
+			</div>
+			{% if forloop.counter|divisibleby:"3" %}
+				</div>
+			{% endif %}
 		{% endfor %}
-	</div>
 	{% endif %}
-	</div>
 {% endblock %}

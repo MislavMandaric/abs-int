@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
-from django.forms import CharField, BooleanField, MultipleChoiceField
+from django.forms import CharField, BooleanField, MultipleChoiceField, CheckboxSelectMultiple
 from datetime import date
 from django import forms
 
@@ -19,10 +19,11 @@ class SearchForm(forms.Form):
 	def __init__(self, *args, **kw):
 		super(SearchForm, self).__init__(*args, **kw)
 		categories = Category.objects.all()
-		OPTIONS = [('none', '')]
+		OPTIONS = []
 		for c in categories:
 			OPTIONS.append((c.name, c.name))
-		self.fields['categories'] = MultipleChoiceField(widget=forms.SelectMultiple, choices=OPTIONS, label="Kategorija")
+		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control'}), \
+			choices=OPTIONS, label="Kategorija")
 
 
 
