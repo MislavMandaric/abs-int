@@ -4,6 +4,7 @@ from django.views.generic import View, TemplateView, CreateView, ListView
 from django.views.generic.detail import DetailView
 
 from .models import *
+from .forms import SearchForm
 
 class Index(TemplateView):
 	template_name = "home.html"
@@ -52,8 +53,17 @@ class RecipeDetailViewv(DetailView):
 
 class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
-	object_list = range(20)
-	# model = Recipe
+	model = Recipe
+	
+	# def get_queryset():
+	# 	queryset = Recipe.objects.all()
+	# 	#filtriranje
+	# 	return queryset
+
+	def get_context_data(self, **kwargs):
+		context = super(RecipeSearchView, self).get_context_data(**kwargs)
+		context['form'] = SearchForm()
+		return context
 
 # ----- akcije -----
 

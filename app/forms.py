@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
-from django.forms import CharField
+from django.forms import CharField, BooleanField
 from datetime import date
 from django import forms
 
