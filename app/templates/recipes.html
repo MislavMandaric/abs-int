@@ -1,12 +1,20 @@
 {% extends "base.html" %}
-{% block page_title %}Home{% endblock %}
-{% block body %}
-	{% for recipe in recipes %}
-		{% if forloop.counter|divisible_by:"3"  %}
+{% load static %}
+{% block page_title %}Recepti{% endblock %}
+{% block page_header %}Recepti{% endblock %}
+{% block page_body %}
+	{% for p in proba %}
+		{% if forloop.counter|divisibleby:"3" %}
 			<div class="row">
-				<div class="col-md-4">
-					recept
-				</div>
+		{% endif %}
+		<div class="col-md-4 recipe-box">
+			<div class="panel panel-default">
+  			<div class="panel-body">
+    			{{ p }}
+			  </div>
+			</div>
+		</div>
+		{% if forloop.counter|divisibleby:"3" %}
 			</div>
 		{% endif %}
 	{% endfor %}
