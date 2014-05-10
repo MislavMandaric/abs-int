@@ -1,5 +1,5 @@
 $(function() {
-    $.get('/tagovi', {csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()}, function(data) {
+    $.get('/tagovi', function(data) {
         var options = []
         for (var i = 0; i < data.length; i++) {
             options.push(data[i].fields);
@@ -22,7 +22,7 @@ $(function() {
 
     $("#reload").on("click", function(event) {
         event.preventDefault();
-        $.get('/vise-recepata', {page: $("#page").val(), csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()}, function(data) {
+        $.get('/vise-recepata', {page: $("#page").val()}, function(data) {
             $("#toreload").remove();
             $("#content").append(data);
         });
