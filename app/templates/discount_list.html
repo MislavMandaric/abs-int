@@ -4,22 +4,15 @@
 {% block page_header %}Popusti{% endblock %}
 {% block page_body %}
 	<table class="table table-hover"> 
-		<!--<thead>
-			<tr>
-				<td>Opis</td>
-				<td>Autor</td>
-				<td>Lajkovi</td>
-			</tr>
-		</thead>-->
 		<tbody>
-			{% for r in discounts %}
+			{% for discount in object_list %}
 				<tr height="80px">
-					<td width="80%">Tekst akcije </td>
+					<td width="80%">{{ discount.text }}</td>
 					<td>
 						<br>
 						<ul class="list-group">
-						  <li class="list-group-item">Autor:</li>
-						  <li class="list-group-item"><span class="badge">6</span> lajkova</li>
+						  <li class="list-group-item">Autor: {{ discount.user.user.username }}</li>
+						  <li class="list-group-item">Objavljeno: {{ discount.date|date:"d.m.Y." }} u {{ discount.date|time:"H:i" }}</li>
 						</ul>
 					</td>
 				</tr>
