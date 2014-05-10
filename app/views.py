@@ -46,9 +46,9 @@ class RecipeCreateView(CreateView):
 	template_name = "recipe_create.html"
 	# model = Recipe
 
-class RecipeDetailViewv(DetailView):
+class RecipeDetailView(DetailView):
 	template_name = "recipe_detail.html"
-	# model = Recipe
+	model = Recipe
 
 class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
@@ -72,7 +72,12 @@ class DiscountCreateView(CreateView):
 
 class DiscountListView(ListView):
 	template_name = "discount_list.html"
-	# model = Discount
+	model = Discount
+
+	def get_context_data(self, **kwargs):
+		context = super(DiscountListView, self).get_context_data(**kwargs)
+		context['discounts'] = [i for i in range(20)]
+		return context
 
 class TagsView(TemplateView):
 	template_name = "tags.html"
