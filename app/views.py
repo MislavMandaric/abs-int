@@ -52,7 +52,14 @@ class ProfileView(DetailView):
 	model = CustomUser
 
 	def get_object(self, queryset=None):
-		return self.request.user
+		self.user = CustomUser.objects.get(user=self.request.user)
+		return self.user
+
+	def get_context_data(self, **kwargs):
+		context = super(ProfileView, self).get_context_data(**kwargs)
+		context['users_recipes'] = self.user.recipes.all()
+		context['users_discounts'] = self.user.discounts.all()
+		return context
 
 # ----- recepti -----
 

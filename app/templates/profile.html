@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% load thumbnail %}
-{% block page_title %}{{ user }}{% endblock %}
+{% block page_title %}{{ object.user.username }}{% endblock %}
 {% block page_header %}
-	{% thumbnail user.image "100x100" as im %}
+	{% thumbnail object.image "100x100" as im %}
 	<img src="{{ im.url }}" class="img-rounded"/>
 	{% endthumbnail %}
-	<small>{{ user }}</small>
+	<small>{{ object.user.username }}</small>
 {% endblock %}
 {% block page_body %}
 	<ul class="nav nav-tabs">
@@ -15,10 +15,52 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade in active" id="recepti">
-        	<button type="button" class="btn btn-default">Dodaj recept</button>
+        	<br>
+        	<a href="{% url 'recipe_create' %}" class="btn btn-default">Dodaj recept</a>
+        	<br><br>
+        	{% for recipe in users_recipes %}
+						{% if forloop.counter0|divisibleby:3 %}
+							<div class="row">
+						{% endif %}
+						<div class="col-md-4 recipe-box">
+							<a href="{% url 'recipe_detail' recipe.id %}">
+								<div class="panel panel-default">
+					  			<div class="panel-body">
+						  			{% thumbnail recipe.image "250x250" as im %}
+							        <img src="{{ im.url }}" class="img-rounded"/>
+							      {% endthumbnail %}
+								</div>
+								<div class="panel-footer">{{ recipe.title }}</div>
+								</div>
+							</a>
+						</div>
+						{% if forloop.counter|divisibleby:3 %}
+							</div>
+						{% endif %}
+					{% endfor %}
         </div>
         <div class="tab-pane fade" id="popusti">
-        	<button type="button" class="btn btn-default">Dodaj popust</button>
+        	<br>
+        	<a href="{% url 'discount_create' %}" class="btn btn-default">Dodaj popust</a>
+        	<br><br>
+        	<table class="table table-hover"> 
+					<tbody>
+						{% for discount in users_discounts %}
+							<tr height="80px">
+								<td width="80%">{{ discount.text }}</td>
+								<td>
+									<br>
+									<ul class="list-group">
+									  <li class="list-group-item">Autor: ja <3</li>
+									  <li class="list-group-item">Objavljeno: {{ discount.date|date:"d.m.Y." }} u {{ discount.date|time:"H:i" }}</li>
+									</ul>
+								</td>
+							</tr>
+						{% empty %}
+						Nema akcija zadnjih 7 dana :(
+						{% endfor %}
+					</tbody>
+				</table>
         </div>
     </div>  
 {% endblock %}
