@@ -10,14 +10,13 @@ urlpatterns = patterns('',
 	url(r'^odjava', 'django.contrib.auth.views.logout', {'next_page': '/'}, name = "logout"),
 
 	url(r'^recepti/(?P<pk>\d+)/$', RecipeDetailView.as_view(), name="recipe_detail"),
-	url(r'^recepti', RecipesView.as_view(), name="recipes"),
 	url(r'^recepti/dodaj-novi', RecipeCreateView.as_view(), name="recipe_create"),
+	url(r'^recepti', RecipesView.as_view(), name="recipes"),
+	
 	url(r'^pretraga', RecipeSearchView.as_view(), name="recipe_search"),
 	
-
-	url(r'^popusti', DiscountListView.as_view(), name="discount_list"),
 	url(r'^akcije/dodaj-novu', DiscountCreateView.as_view(), name="discount_create"),
-
+	url(r'^popusti', DiscountListView.as_view(), name="discount_list"),
 	
 	url(r'^vise-recepata', MoreRecipesView.as_view(), name="more_recipes"),
 
