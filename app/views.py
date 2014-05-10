@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.core import serializers
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
@@ -99,6 +101,11 @@ class DiscountCreateView(CreateView):
 class DiscountListView(ListView):
 	template_name = "discount_list.html"
 	model = Discount
+
+	def get_queryset(self):
+		limit = datetime.datetime.now() - timedelta(days=7)
+		queryset = Discount.objects.filter(date__gte=limit).order_by('-date')
+		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(DiscountListView, self).get_context_data(**kwargs)
