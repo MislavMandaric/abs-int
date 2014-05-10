@@ -44,7 +44,15 @@ class RecipesView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(RecipesView, self).get_context_data(**kwargs)
-		context['recipes'] = [i for i in range(20)]
+		limit = 3
+		recepies = Recipe.objects.all().order_by('-date')
+		if recepies.count() > limit:
+			more = True
+		else:
+			more = False
+
+		context['recipes'] = recepies[:limit]
+		context['more'] = more
 		return context
 
 class RecipeCreateView(CreateView):
@@ -114,7 +122,31 @@ class DiscountListView(ListView):
 		return context
 
 class TagsView(View):
-    def get(self, *args, **kwargs):
-        tags = Tag.objects.all()
-        data = serializers.serialize('json', tags)
-        return HttpResponse(data, mimetype='application/json')
+	def get(self, *args, **kwargs):
+		tags = Tag.objects.all()
+		data = serializers.serialize('json', tags)
+		return HttpResponse(data, mimetype='application/json')
+
+class MoreRecipesView(TemplateView):
+	template_name = "more_recipes.html"
+
+	def get_context_data(self, **kwargs):
+		current_page = int(self.request.GET.get('page', 1))
+
+		context = super(MoreRecipesView, self).get_context_data(**kwargs)
+		recepies = Recipe.objects.all().order_by('-date')
+
+		limit = 3
+		more = 3
+		limit_from = limit + more * (current_page - 1)
+		limit_to = limit_from + more
+
+		if recepies.count() > limit_to:
+			more = True
+		else:
+			more = False
+
+		context['recipes'] = recepies[limit_from:limit_to]
+		context['more'] = more
+		context['page'] = current_page + 1
+		return context
