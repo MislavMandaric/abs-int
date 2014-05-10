@@ -1,5 +1,5 @@
 $(function() {
-    $.post('', {csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()}, function(data) {
+    $.get('/tagovi', {csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()}, function(data) {
         $('#search').selectize({
             selectOnTab: true,
             hideSelected: true,
@@ -8,4 +8,3 @@ $(function() {
         });
     });
 });
-
