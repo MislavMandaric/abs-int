@@ -19,4 +19,10 @@ $(function() {
             }
         });
     });
+
+    $("#reload").click(function() {
+        $.get('/recepies', {page: $("#page").val(), csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()}, function(data) {
+            
+        });
+    });
 });
