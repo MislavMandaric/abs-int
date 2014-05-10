@@ -1,0 +1,19 @@
+{% for recipe in recipes %}
+		{% if forloop.counter0|divisibleby:3 %}
+			<div class="row">
+		{% endif %}
+		<div class="col-md-4 recipe-box">
+			<div class="panel panel-default">
+  			<div class="panel-body">
+	  			<img src="{{ recipe.image.url }}" class="img-rounded" width="250" height="250"/>
+			</div>
+			<div class="panel-footer">{{ recipe.title }}</div>
+			</div>
+		</div>
+		{% if forloop.counter|divisibleby:3 %}
+			</div>
+		{% endif %}
+	{% endfor %}
+	{% if more %}
+		<p><a href="#" id="reload" class="btn btn-default" role="button">Učitaj još</a></p>
+{% endif %}
