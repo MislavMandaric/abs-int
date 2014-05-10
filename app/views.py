@@ -80,8 +80,8 @@ class DiscountListView(ListView):
 		context['discounts'] = [i for i in range(20)]
 		return context
 
-class TagsView(TemplateView):
-    def post(self, *args, **kwargs):
+class TagsView(View):
+    def get(self, *args, **kwargs):
         tags = Tag.object.all()
         data = serializers.serialize('json', tags)
         return HttpResponse(data, mimetype='application/json')
