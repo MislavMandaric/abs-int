@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class CustomUser(models.Model):
     user = models.OneToOneField(User, primary_key=True)
-    image = models.ImageField(upload_to='/avatars', null=True, blank=True)
+    image = models.ImageField(upload_to='avatars', null=True, blank=True)
 
     def __unicode__(self):
         return self.user.username
@@ -13,7 +13,7 @@ class CustomUser(models.Model):
 class Recipe(models.Model):
     title = models.CharField(max_length=200, blank=False)
     text = models.TextField(blank=False)
-    image = models.ImageField(upload_to='/photos', null=True, blank=False)
+    image = models.ImageField(upload_to='photos', null=True, blank=False)
     date = models.DateTimeField(auto_now_add=True, editable=False)
     likes = models.IntegerField(default=0, editable=False)
     user = models.ForeignKey(CustomUser, related_name='recipes')

@@ -9,13 +9,15 @@ urlpatterns = patterns('',
 	url(r'^prijava/$', 'django.contrib.auth.views.login',{'authentication_form': CustomAuthenticationForm}, name = "login" ),
 	url(r'^odjava/$', 'django.contrib.auth.views.logout', name = "logout"),
 
+	url(r'^recepti/(?P<id>[0-9]+)/$', RecipeDetailView.as_view(), name="recipe_detail"),
 	url(r'^recepti/', RecipesView.as_view(), name="recipes"),
 	url(r'^recepti/dodaj-novi', RecipeCreateView.as_view(), name="recipe_create"),
 	url(r'^pretraga', RecipeSearchView.as_view(), name="recipe_search"),
-	url(r'^recepti/(?P<id>[0-9]+)/$', RecipeDetailViewv.as_view(), name="recipe_detail"),
+	
 
-	url(r'^akcije', DiscountListView.as_view(), name="discount_list"),
+	url(r'^popusti', DiscountListView.as_view(), name="discount_list"),
 	url(r'^akcije/(?P<id>[0-9]+)/$', DiscountCreateView.as_view(), name="discount_create"),
 
+	url(r'^tagovi', TagsView.as_view(), name="tagovi"),
 	url(r'^', Index.as_view(), name="index"),
 )

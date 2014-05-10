@@ -1,7 +1,8 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, CreateView, ListView
 from django.views.generic.detail import DetailView
+from django.core import serializers
 
 from .models import *
 from .forms import SearchForm
@@ -46,9 +47,9 @@ class RecipeCreateView(CreateView):
 	template_name = "recipe_create.html"
 	# model = Recipe
 
-class RecipeDetailViewv(DetailView):
+class RecipeDetailView(DetailView):
 	template_name = "recipe_detail.html"
-	# model = Recipe
+	model = Recipe
 
 class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
@@ -72,11 +73,15 @@ class DiscountCreateView(CreateView):
 
 class DiscountListView(ListView):
 	template_name = "discount_list.html"
-	# model = Discount
+	model = Discount
+
+	def get_context_data(self, **kwargs):
+		context = super(DiscountListView, self).get_context_data(**kwargs)
+		context['discounts'] = [i for i in range(20)]
+		return context
 
 class TagsView(TemplateView):
-	template_name = "tags.html"
-
-	def render_to_response(self, context, **response_kwargs):
-		context['']
-		return super(TagsView, self).render_to_response(context, **response_kwargs)
+    def post(self, *args, **kwargs):
+        tags = Tag.object.all()
+        data = serializers.serialize('json', tags)
+        return HttpResponse(data, mimetype='application/json')

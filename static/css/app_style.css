@@ -43,3 +43,8 @@ code {
 .recipe-box{
   text-align: center;
 }
+
+.search-button{
+  height: 100px;
+  width: 100px;
+}
