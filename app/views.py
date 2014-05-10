@@ -19,7 +19,7 @@ class Index(TemplateView):
 # ----- korisnici -----
 
 class RegistrationView(TemplateView):
-	template_name = "registration.html"
+	template_name = "registration/registration.html"
 
 class ProfileView(TemplateView):
 	template_name = "profile.html"

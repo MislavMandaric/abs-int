@@ -4,13 +4,13 @@ from .forms import CustomAuthenticationForm
 from .views import *
 
 urlpatterns = patterns('',
-	url(r'^registracija/', RegistrationView.as_view(), name="registration"),
-	url(r'^profil/', ProfileView.as_view(), name="profile"),
-	url(r'^prijava/$', 'django.contrib.auth.views.login',{'authentication_form': CustomAuthenticationForm}, name = "login" ),
-	url(r'^odjava/$', 'django.contrib.auth.views.logout', name = "logout"),
+	url(r'^profil', ProfileView.as_view(), name="profile"),
+	url(r'^registracija', RegistrationView.as_view(), name="registration"),
+	url(r'^prijava', 'django.contrib.auth.views.login',{'authentication_form': CustomAuthenticationForm}, name = "login" ),
+	url(r'^odjava', 'django.contrib.auth.views.logout', name = "logout"),
 
 	url(r'^recepti/(?P<id>[0-9]+)/$', RecipeDetailView.as_view(), name="recipe_detail"),
-	url(r'^recepti/', RecipesView.as_view(), name="recipes"),
+	url(r'^recepti', RecipesView.as_view(), name="recipes"),
 	url(r'^recepti/dodaj-novi', RecipeCreateView.as_view(), name="recipe_create"),
 	url(r'^pretraga', RecipeSearchView.as_view(), name="recipe_search"),
 	
