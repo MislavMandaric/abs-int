@@ -20,9 +20,11 @@ $(function() {
         });
     });
 
-    $("#reload").click(function() {
-        $.get('/recepies', {page: $("#page").val(), csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()}, function(data) {
-            
+    $("#reload").on("click", function(event) {
+        event.preventDefault();
+        $.get('/vise-recepata', {page: $("#page").val(), csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()}, function(data) {
+            $("#toreload").remove();
+            $("#content").append(data);
         });
     });
 });
