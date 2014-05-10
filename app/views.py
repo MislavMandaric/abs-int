@@ -20,22 +20,12 @@ class Index(TemplateView):
 
 # ----- korisnici -----
 
-class RegistrationView(TemplateView):
+class RegistrationView(CreateView):
 	template_name = "registration/registration.html"
 
 class ProfileView(DetailView):
 	template_name = "profile.html"
 	model = CustomUser
-
-class LoginView(View):
-	def post(self, request, *args, **kwargs):
-	# logirati korisnika
-		return HttpResponseRedirect(reverse('profile'))
-
-class LogoutView(View):
-	def post(self, request, *args, **kwargs):
-	# odlogirati korisnika
-		return HttpResponseRedirect((reverse('index')))
 
 # ----- recepti -----
 
