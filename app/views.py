@@ -45,7 +45,7 @@ class RecipesView(TemplateView):
 
 class RecipeCreateView(CreateView):
 	template_name = "recipe_create.html"
-	# model = Recipe
+	model = Recipe
 
 class RecipeDetailView(DetailView):
 	template_name = "recipe_detail.html"

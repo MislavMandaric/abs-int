@@ -48,3 +48,11 @@ code {
   height: 100px;
   width: 100px;
 }
+
+.jumbotron {
+  height: 500px;
+  /*background-image: url("/static/images/book_wall.png");*/
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
