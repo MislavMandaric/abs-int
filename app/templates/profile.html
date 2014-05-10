@@ -4,6 +4,7 @@
 {% block page_title %}{{ user }}{% endblock %}
 {% block page_header %}
 	{% thumbnail user.image "100x100" as im %}
+    {{user.image}}
 	<img src="{{ im.url }}" class="img-rounded"/>
 	{% endthumbnail %}
 	<small>{{ user }}</small>

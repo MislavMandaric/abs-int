@@ -26,10 +26,10 @@ class SearchForm(forms.Form):
 			choices=OPTIONS, label="Kategorija")
 
 class RecipeForm(forms.Form):
-	title = CharField(widget=TextInput(attrs={'class':'form-control'}))
-	text = CharField(widget=Textarea(attrs={'class':'form-control'}))
-	image = FileField(widget=ClearableFileInput(attrs={'class':'form-control'}))
-	tags = CharField(widget=TextInput(attrs={'class':'form-control'}))
+	title = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Naziv")
+	text = CharField(widget=Textarea(attrs={'class':'form-control'}), label="Upute")
+	image = FileField(label="Slika", required=False)
+	tags = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Tagovi", required=False)
 
 	def __init__(self, *args, **kw):
 		super(RecipeForm, self).__init__(*args, **kw)

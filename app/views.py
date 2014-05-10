@@ -77,6 +77,45 @@ class RecipeCreateView(FormView):
 	form_class = RecipeForm
 	success_url = '/'
 
+	def form_valid(self, form):
+		data = form.cleaned_data
+		print data
+		title = data['title']
+		text = data['text']
+		image = data['image']
+		user = self.request.user
+		custom_user = CustomUser.objects.get(user=user)
+		rp = Recipe(title=title, text=text, image=image, user=custom_user)
+		rp.save()
+		# tagovi
+		tags = data['tags']
+		tags = tags.split(',')
+		for t in tags:
+			try:
+				tag = Tag.objects.get(name=t)
+			except:
+				# taga nema, stvori novi
+				tag = Tag(name=t)
+				tag.save()
+			rt = RecipeTag(recipe=rp, tag=tag)
+			rt.save()
+
+		# kategorije
+		categories = data['categories']
+		for c in categories:
+			try:
+				cat = Category.objects.get(name=c)
+				rc = RecipeCategory(recipe=rp, categorie=cat)
+				rc.save()
+			except:
+				pass
+
+		return HttpResponseRedirect(self.get_success_url())
+
+	def post(self, request, *args, **kwargs):
+		self.request = request
+		return super(RecipeCreateView, self).post(request, *args, **kwargs)
+
 class RecipeDetailView(DetailView):
 	template_name = "recipe_detail.html"
 	model = Recipe
@@ -108,13 +147,13 @@ class RecipeSearchView(ListView):
 
 		for cat in categories:
 			if cat != 'none':
-				filters_categories |= Q(recipe_categories__categorie__name__icontains=cat)	
+				filters_categories |= Q(recipe_categories__categorie__name=cat)	
 
 		filters_tags = Q()
 		if tags:
 			tags_list = tags.split(', ')
 			for tag in tags_list:
-				filters_tags |= Q(recipe_tags__tag__name__icontains=tag)
+				filters_tags |= Q(recipe_tags__tag__name=tag)
 
 		queryset = Recipe.objects.filter(filters_tags, filters_categories).distinct().order_by('-date')
 
