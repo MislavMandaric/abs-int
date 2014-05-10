@@ -61,12 +61,17 @@ class RecipeSearchView(ListView):
 		filters_categories = Q()
 
 		categories = self.request.GET.getlist('categories', [])
+		tags = self.request.GET.get('tags', '')
+
+		self.result = False
+		if categories == [] and tags == '':
+			return []
+
 		for cat in categories:
 			if cat != 'none':
 				filters_categories |= Q(recipe_categories__categorie__name__icontains=cat)	
 
 		filters_tags = Q()
-		tags = self.request.GET.get('tags', '')
 		if tags:
 			tags_list = tags.split(', ')
 			for tag in tags_list:
@@ -74,11 +79,9 @@ class RecipeSearchView(ListView):
 
 		queryset = Recipe.objects.filter(filters_tags, filters_categories).distinct().order_by('-date')
 
-		if queryset.count() == 0:
-			self.result = False
-		else:
+		if queryset.count() != 0:
 			self.result = True
-			
+	
 		return queryset
 
 	def get_context_data(self, **kwargs):
