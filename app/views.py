@@ -4,11 +4,11 @@ from django.core import serializers
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from django.views.generic import View, TemplateView, CreateView, ListView
+from django.views.generic import View, TemplateView, CreateView, ListView, FormView
 from django.views.generic.detail import DetailView
 
 from .models import *
-from .forms import SearchForm
+from .forms import SearchForm, RegistrationForm
 
 class Index(TemplateView):
 	template_name = "home.html"
@@ -20,8 +20,11 @@ class Index(TemplateView):
 
 # ----- korisnici -----
 
-class RegistrationView(CreateView):
+class RegistrationView(FormView):
 	template_name = "registration/registration.html"
+	form_class = RegistrationForm
+	success_url = '/'
+
 
 class ProfileView(DetailView):
 	template_name = "profile.html"
