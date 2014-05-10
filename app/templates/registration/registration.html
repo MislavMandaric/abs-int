@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
-{% block page_title %}Registriraj se{% endblock %}
-{% block page_header %}Registriraj se{% endblock %}
+{% block page_title %}Registracija{% endblock %}
+{% block page_header %}Registracija{% endblock %}
 {% block page_body %}
 <div class="row">
 	<div class="col-md-4"> 
 			<div class="panel panel-default">
 		    <div class="panel-body">
 					{{ form.as_p }}
+					<button type="submit" class="btn btn-default pull-right">Registriraj me</button>
 				</div>
 		</div>	
 	</div>
