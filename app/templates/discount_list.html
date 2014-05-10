@@ -1,24 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
-{% block page_title %}Popusti{% endblock %}
-{% block page_header %}Popusti{% endblock %}
+{% block page_title %}Akcije{% endblock %}
+{% block page_header %}Akcije{% endblock %}
 {% block page_body %}
-	<table class="table table-hover"> 
-		<tbody>
-			{% for discount in object_list %}
-				<tr height="80px">
-					<td width="80%">{{ discount.text }}</td>
-					<td>
-						<br>
-						<ul class="list-group">
-						  <li class="list-group-item">Autor: {{ discount.user.user.username }}</li>
-						  <li class="list-group-item">Objavljeno: {{ discount.date|date:"d.m.Y." }} u {{ discount.date|time:"H:i" }}</li>
-						</ul>
-					</td>
-				</tr>
-			{% empty %}
-			Nema akcija zadnjih 7 dana :(
-			{% endfor %}
-		</tbody>
-	</table>
+	{% if object_list %}
+		<table class="table table-hover"> 
+			<tbody>
+				{% for discount in object_list %}
+					<tr height="80px">
+						<td width="80%">{{ discount.text }}</td>
+						<td>
+							<br>
+							<ul class="list-group">
+							  <li class="list-group-item">Autor: {{ discount.user.user.username }}</li>
+							  <li class="list-group-item">Objavljeno: {{ discount.date|date:"d.m.Y." }} u {{ discount.date|time:"H:i" }}</li>
+							</ul>
+						</td>
+					</tr>
+				{% empty %}
+				Nema akcija zadnjih 7 dana :(
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<div class="alert alert-danger">Nema akcija u zadnjih 7 dana.</div>
+	{% endif %}
 {% endblock %}

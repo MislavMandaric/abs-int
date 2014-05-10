@@ -57,8 +57,8 @@ class ProfileView(DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super(ProfileView, self).get_context_data(**kwargs)
-		context['users_recipes'] = self.user.recipes.all()
-		context['users_discounts'] = self.user.discounts.all()
+		context['users_recipes'] = self.user.recipes.order_by('-date')
+		context['users_discounts'] = self.user.discounts.order_by('-date')
 		return context
 
 # ----- recepti -----
