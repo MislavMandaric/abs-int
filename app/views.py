@@ -1,7 +1,8 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, CreateView, ListView
 from django.views.generic.detail import DetailView
+from django.core import serializers
 
 from .models import *
 from .forms import SearchForm
@@ -75,8 +76,7 @@ class DiscountListView(ListView):
 	# model = Discount
 
 class TagsView(TemplateView):
-	template_name = "tags.html"
-
-	def render_to_response(self, context, **response_kwargs):
-		context['']
-		return super(TagsView, self).render_to_response(context, **response_kwargs)
+    def post(self, *args, **kwargs):
+        tags = Tag.object.all()
+        data = serializers.serialize('json', tags)
+        return HttpResponse(data, mimetype='application/json')
