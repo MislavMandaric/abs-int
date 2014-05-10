@@ -54,3 +54,9 @@ class DiscountListView(ListView):
 	template_name = "discount_list.html"
 	# model = Discount
 
+class TagsView(TemplateView):
+	template_name = "tags.html"
+
+	def render_to_response(self, context, **response_kwargs):
+		context['']
+		return super(TagsView, self).render_to_response(context, **response_kwargs)
