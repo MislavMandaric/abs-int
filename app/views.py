@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.contrib.auth import authenticate, login
 from django.core import serializers
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
@@ -24,6 +25,26 @@ class RegistrationView(FormView):
 	template_name = "registration/registration.html"
 	form_class = RegistrationForm
 	success_url = '/'
+
+	def form_valid(self, form):
+		data = form.cleaned_data
+		username = data['username']
+		mail = data['email']
+		password = data['password']
+		password2 = data['password2']
+		if password != password2:
+			return self.render_to_response(self.get_context_data(form=form))
+		image = data['image']
+		user = User.objects.create_user(username, mail, password)
+		custom_user = CustomUser(user=user, image=image)
+		custom_user.save()
+		user = authenticate(username=username, password=password)
+		login(self.request, user)
+		return HttpResponseRedirect(self.get_success_url())
+
+	def post(self, request, *args, **kwargs):
+		self.request = request
+		return super(RegistrationView, self).post(request, *args, **kwargs)
 
 
 class ProfileView(DetailView):

@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.forms.widgets import PasswordInput, TextInput, Textarea, ClearableFileInput, EmailInput
+from django.forms.widgets import PasswordInput, TextInput, Textarea, ClearableFileInput, EmailInput, FileInput
 from django.forms import CharField, BooleanField, MultipleChoiceField, CheckboxSelectMultiple, FileField
 from datetime import date
 from django import forms
@@ -40,9 +42,10 @@ class ReceiptForm(forms.Form):
 
 
 class RegistrationForm(forms.Form):
-  email = CharField(widget=EmailInput(attrs={'class':'form-control'}))
-  username = CharField(widget=TextInput(attrs={'class':'form-control'}))
-  password = CharField(widget=PasswordInput(attrs={'class':'form-control'}))
-  image = FileField(widget=ClearableFileInput(attrs={'class':'form-control'}))
+  email = CharField(widget=EmailInput(attrs={'class':'form-control'}), label="Email adresa")
+  username = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Korisničko ime")
+  password = CharField(widget=PasswordInput(attrs={'class':'form-control'}), label="Lozinka")
+  password2 = CharField(widget=PasswordInput(attrs={'class':'form-control'}), label="Ponovljena lozinka")
+  image = FileField(label="Avatar", required=False)
 
 
