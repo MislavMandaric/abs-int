@@ -23,8 +23,9 @@ class Index(TemplateView):
 class RegistrationView(TemplateView):
 	template_name = "registration/registration.html"
 
-class ProfileView(TemplateView):
+class ProfileView(DetailView):
 	template_name = "profile.html"
+	model = CustomUser
 
 class LoginView(View):
 	def post(self, request, *args, **kwargs):

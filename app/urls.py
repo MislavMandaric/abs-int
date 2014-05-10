@@ -7,7 +7,7 @@ urlpatterns = patterns('',
 	url(r'^profil', ProfileView.as_view(), name="profile"),
 	url(r'^registracija', RegistrationView.as_view(), name="registration"),
 	url(r'^prijava', 'django.contrib.auth.views.login',{'authentication_form': CustomAuthenticationForm}, name = "login" ),
-	url(r'^odjava', 'django.contrib.auth.views.logout', name = "logout"),
+	url(r'^odjava', 'django.contrib.auth.views.logout', {'next_page': '/'}, name = "logout"),
 
 	url(r'^recepti/(?P<pk>\d+)/$', RecipeDetailView.as_view(), name="recipe_detail"),
 	url(r'^recepti', RecipesView.as_view(), name="recipes"),
@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 	
 
 	url(r'^popusti', DiscountListView.as_view(), name="discount_list"),
-	url(r'^akcije/(?P<id>[0-9]+)/$', DiscountCreateView.as_view(), name="discount_create"),
+	url(r'^akcije/dodaj-novu', DiscountCreateView.as_view(), name="discount_create"),
 
 	
 	url(r'^vise-recepata', MoreRecipesView.as_view(), name="more_recipes"),

@@ -30,10 +30,14 @@
             <li><a href="{% url 'recipe_search' %}">Pretraga</a></li>
             <li><a href="{% url 'discount_list' %}">Popusti</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-
-            <li><a href="{% url 'login' %}">Login</a></li>
-          </ul>
+					<ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><p class="navbar-text">Ulogiran kao {{ user }}</p></li>
+                    <li><a href="{% url 'logout' %}">Odjava</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Prijava</a></li>
+                {% endif %}
+            </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
