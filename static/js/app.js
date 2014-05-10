@@ -4,7 +4,7 @@ $(function() {
         for (var i = 0; i < data.length; i++) {
             options.push(data[i].fields);
         }
-        $('#search').selectize({
+        $('#id_tags').selectize({
             persist: false,
             maxItems: 5,
             selectOnTab: true,
