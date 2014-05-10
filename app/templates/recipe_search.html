@@ -7,19 +7,8 @@
     <div class="panel-body">
         <form role="form" action="">
         	<div class="row">
-        		<div class="col-md-10">
-		        	<div class="form-group">
-			        	<label for="id_tags">Tags:</label>
-			        	{{ form.tags }}
-			        </div>
-			        <div class="form-group">
-			        		<label for="id_cat1">Cat1:</label>
-			        		{{ form.cat1 }}
-			        		<label for="id_cat2">Cat2:</label>
-			        		{{ form.cat2 }}
-			        </div>
-			      </div>
-			      <div class="col-md-2 form-group">
+        		{{form.as_p}}
+			   <div class="col-md-2 form-group">
 			      	<button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-search"></button>
 			      </div>
 		      </div>

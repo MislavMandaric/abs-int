@@ -54,10 +54,10 @@ class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
 	model = Recipe
 	
-	# def get_queryset():
-	# 	queryset = Recipe.objects.all()
-	# 	#filtriranje
-	# 	return queryset
+	def get_queryset(self):
+		queryset = Recipe.objects.all()
+		#filtriranje
+		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(RecipeSearchView, self).get_context_data(**kwargs)

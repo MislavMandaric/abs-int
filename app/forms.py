@@ -1,9 +1,11 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
-from django.forms import CharField, BooleanField
+from django.forms import CharField, BooleanField, MultipleChoiceField
 from datetime import date
 from django import forms
+
+from .models import Category
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -13,9 +15,14 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 class SearchForm(forms.Form):
 	tags = CharField(widget=TextInput(attrs={'class':'form-control'}))
-	cat1 = BooleanField(required=False)
-	cat2 = BooleanField(required=False)
 
+	def __init__(self, *args, **kw):
+		super(SearchForm, self).__init__(*args, **kw)
+		categories = Category.objects.all()
+		OPTIONS = [('none', '')]
+		for c in categories:
+			OPTIONS.append((c.name, c.name))
+		self.fields[c.name] = MultipleChoiceField(widget=forms.SelectMultiple, choices=OPTIONS, label="Kategorija")
 
 
 
