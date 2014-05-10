@@ -14,7 +14,7 @@ class CustomUser(models.Model):
 class Recipe(models.Model):
     title = models.CharField(max_length=200, blank=False)
     text = models.TextField(blank=False)
-    image = models.ImageField(upload_to='photos', null=True, blank=False)
+    image = models.ImageField(upload_to='photos', null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True, editable=False)
     likes = models.IntegerField(default=0, editable=False)
     user = models.ForeignKey(CustomUser, related_name='recipes')
@@ -42,7 +42,7 @@ class Discount(models.Model):
         ordering = ['date']
 
     def __unicode__(self):
-        return self.title
+        return self.text
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True, blank=False)
