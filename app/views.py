@@ -38,9 +38,8 @@ class RecipesView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(RecipesView, self).get_context_data(**kwargs)
-		context['proba'] = [i for i in range(20)]
+		context['recipes'] = [i for i in range(20)]
 		return context
-
 
 class RecipeCreateView(CreateView):
 	template_name = "recipe_create.html"

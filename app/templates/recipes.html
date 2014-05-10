@@ -3,14 +3,14 @@
 {% block page_title %}Recepti{% endblock %}
 {% block page_header %}Recepti{% endblock %}
 {% block page_body %}
-	{% for p in proba %}
+	{% for r in recipes %}
 		{% if forloop.counter|divisibleby:"3" %}
 			<div class="row">
 		{% endif %}
 		<div class="col-md-4 recipe-box">
 			<div class="panel panel-default">
   			<div class="panel-body">
-    			{{ p }}
+    			{{ r }}
 			  </div>
 			</div>
 		</div>
