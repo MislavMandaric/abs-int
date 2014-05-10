@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block page_title %}Login{% endblock %}
 {% block page_header %}Login{% endblock %}
+{% block header %}{% endblock %}
 {% block page_body %}
 
 <div class="row">
@@ -8,7 +9,7 @@
         {% if form.errors %}
             <div class="alert alert-danger">Krivo korisničko ime ili lozinka.</div>
         {% endif %}
-        <form role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+        <!--<form role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
         {% csrf_token %}
         {% for bound_field in form %}
             <div class="form-group">
@@ -20,6 +21,29 @@
         <button type="submit" class="btn btn-default pull-right" value="login">Login</button>
         <input type="hidden" name="next" value="{{ next }}" />
         </form>
+        <form role="form" method="post" action="/prijava/">
+        <input type='hidden' name='csrfmiddlewaretoken' value='EZSLQ7FQd5FWzfM80btlS1RiTcVpwMIM' />
+        
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input class="form-control" id="id_username" name="username" type="text" />
+            </div>
+        
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                <input class="form-control" id="id_password" name="password" type="password" />
+            </div>
+        
+
+        <button type="submit" class="btn btn-default pull-right" value="login">Login</button>
+        <input type="hidden" name="next" value="" />
+        </form>-->
+        <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Prijavi se</h2>
+        <input type="text" class="form-control"  id="id_username" name="username" placeholder="Korisničko ime" required autofocus>
+        <input type="password" class="form-control" id="id_password" name="password" placeholder="Lozinka" required>
+        <button class="btn btn-lg btn-default btn-block" type="submit">Prijava</button>
+      </form>
     </div>
 </div>
 
