@@ -75,9 +75,9 @@ class UserRecipe(models.Model):
         
 
 class RecipeCategory(models.Model):
-    recipe = models.ForeignKey(Recipe)
+    recipe = models.ForeignKey(Recipe, related_name='recipe_categories')
     categorie = models.ForeignKey(Category)
 
 class RecipeTag(models.Model):
-    recipe = models.ForeignKey(Recipe)
+    recipe = models.ForeignKey(Recipe, related_name='recipe_tags')
     tag = models.ForeignKey(Tag)

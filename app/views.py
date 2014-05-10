@@ -57,22 +57,34 @@ class RecipeSearchView(ListView):
 	model = Recipe
 	
 	def get_queryset(self):
-		queryset = Recipe.objects.all()
-		categories = self.request.GET.get('categories', [])
+		queryset = []
+		filters_categories = Q()
 
-		filters = Q()
+		categories = self.request.GET.getlist('categories', [])
+		for cat in categories:
+			if cat != 'none':
+				filters_categories |= Q(recipe_categories__categorie__name__icontains=cat)	
 
+		filters_tags = Q()
 		tags = self.request.GET.get('tags', '')
 		if tags:
 			tags_list = tags.split(', ')
 			for tag in tags_list:
-				filters |= Q(tags__name__icontains=tag)
+				filters_tags |= Q(recipe_tags__tag__name__icontains=tag)
 
+		queryset = Recipe.objects.filter(filters_tags, filters_categories).distinct().order_by('-date')
+
+		if queryset.count() == 0:
+			self.result = False
+		else:
+			self.result = True
+			
 		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(RecipeSearchView, self).get_context_data(**kwargs)
 		context['form'] = SearchForm()
+		context['result'] = self.result
 		return context
 
 # ----- akcije -----
