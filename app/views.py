@@ -246,9 +246,12 @@ class MoreRecipesView(TemplateView):
 		return context
 
 class LikeView(View):
-	def get(self, *args, **kwargs):
+	def post(self, *args, **kwargs):
 		user = self.request.user
-		custom_user = CustomUser.objects.get(user=user)
+        try:
+		    custom_user = CustomUser.objects.get(user=user)
+        except:
+            return HttpResponse("")
 		rp_id = self.request.GET.get('id', '')
 		rp = Recipe.objects.get(id=rp_id)
 		if rp.user != custom_user:
