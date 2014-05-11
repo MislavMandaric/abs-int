@@ -1,4 +1,3 @@
-
 ArrayList<Point> points = new ArrayList<Point>();
 ArrayList<Balon> baloni = new ArrayList<Balon>();
 
@@ -11,16 +10,14 @@ int bulb;
 PImage img;
 
 void setup(){
-  size(700, 300);
-  println("fshsudj");
+  size(500, 300);
   ProcessingInit();
-  println("papapapap");
   smooth();
   colorMode(HSB, 100);
   rectMode(CENTER);
   bulb = points.size();
   //noCursor();
-  img = loadImage("HackLogo.png"); // ili http://i.imgur.com/02HK6iD.png
+  img = loadImage("http://i.imgur.com/Dcn1yLE.png"); // ili http://i.imgur.com/02HK6iD.png
   img.resize(250,250);
   
   for(int k = 0; k < 50; k++){
@@ -32,7 +29,7 @@ void setup(){
 
 void draw() {
     
-	mx = easy(mouseX, mx, 0.15);
+  mx = easy(mouseX, mx, 0.15);
     my = easy(mouseY, my, 0.15);
     velicina = easy(abs(pmouseX - mouseX) + abs(pmouseY - mouseY), velicina, 0.05); 
     if (velicina <= 0)
@@ -43,7 +40,7 @@ void draw() {
     if (points.size() > N)
       points.remove(0);
     
-	
+  
   background(0, 0, 100);
 
 
@@ -67,7 +64,11 @@ void draw() {
   
 
   time = time + 1;
-  image(img,img.width/2 + 25, height/2);
+  pushMatrix();
+  translate(img.width/2 + 25, img.width/2 + 25);
+  scale(1);
+  image(img,0,0);
+  popMatrix();
 }
 
 void mouseMoved() {
@@ -80,16 +81,16 @@ float dx;
 float boja = 0;
 
 Balon(float x, float y, float r){
-	this.y = y;
-	this.x = x;
-	this.r = r;
+  this.y = y;
+  this.x = x;
+  this.r = r;
 }
 
 void update(int k){
 dx = x - map(r,0,100,0,1) + map(r,0,100,0,30) * sin(radians(map(k,0,baloni.size(),0,360) + time));
 y = y - map(r,0,100,0,1);
 if(y < -50)
-	y = height + 50;
+  y = height + 50;
 }
 
 void display(){
@@ -126,9 +127,9 @@ class Point {
 
     /////// dva
     stroke(0,0,100, 50);
-	strokeWeight(2);
+  strokeWeight(2);
     fill((0 * 100.0/360 + 4)%100, 33, 100);
-	if(vel < 10)
+  if(vel < 10)
     fill((0 * 100.0/360 + 4)%100, map(vel, 0, 10, 0, 33), 100);
     pushMatrix();
     translate(0, 0);
@@ -179,5 +180,5 @@ boolean kanc = false;
 
 
 void resize(float X, float  Y) {
-  size(X,250);
+  size(X,Y);
 }
