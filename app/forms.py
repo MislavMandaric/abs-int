@@ -23,13 +23,13 @@ class SearchForm(forms.Form):
 		for c in categories:
 			OPTIONS.append((c.name, c.name))
 		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control checkbox'}), \
-			choices=OPTIONS, label="Kategorije")
+			choices=OPTIONS, label="Kategorija/e")
 
 class RecipeForm(forms.Form):
 	title = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Naziv")
 	text = CharField(widget=Textarea(attrs={'class':'form-control wysihtml5', 'rows': 10,
                               'cols': 35}), label="Tekst")
-	image = FileField(label="Slika", required=False)
+	image = FileField(widget=FileInput(), label="Slika", required=False)
 	tags = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Tagovi", required=False)
 
 	def __init__(self, *args, **kw):
@@ -38,7 +38,7 @@ class RecipeForm(forms.Form):
 		OPTIONS = []
 		for c in categories:
 			OPTIONS.append((c.name, c.name))
-		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control'}), \
+		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control checkbox'}), \
 			choices=OPTIONS, label="Kategorija/e")
 
 
@@ -47,7 +47,7 @@ class RegistrationForm(forms.Form):
   username = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Korisničko ime")
   password = CharField(widget=PasswordInput(attrs={'class':'form-control'}), label="Lozinka")
   password2 = CharField(widget=PasswordInput(attrs={'class':'form-control'}), label="Ponovljena lozinka")
-  image = FileField(widget=FileInput(attrs={'class':'form-control'}), label="Avatar", required=False)
+  image = FileField(widget=FileInput(), label="Avatar", required=False)
 
 
 class DiscountForm(forms.Form):
