@@ -19,6 +19,7 @@ void setup(){
   //noCursor();
   img = loadImage("http://i.imgur.com/Dcn1yLE.png"); // ili http://i.imgur.com/02HK6iD.png
   slogan = loadImage("http://i.imgur.com/SEo302G.png");
+  slogan2 = loadImage("http://i.imgur.com/5yDDWOR.png");
   img.resize(250,250);
   
   for(int k = 0; k < 50; k++){
@@ -70,7 +71,11 @@ void draw() {
   scale(1);
   image(img,0,0);
   popMatrix();
-  image(slogan,width - slogan.width/2 * 1.1,height/2);
+
+  if(mouseX > width - slogan.width/2 * 1.1 - slogan.width/2 && mouseX < width - slogan.width/2 * 1.1 + slogan.width/2 && mouseY > height/2 - slogan.height/2 && mouseY < height/2 + slogan.height/2)
+    image(slogan2,width - slogan.width/2 * 1.1,height/2);
+  else
+    image(slogan,width - slogan.width/2 * 1.1,height/2);
 }
 
 void mouseMoved() {
@@ -167,6 +172,8 @@ class Point {
 boolean kreni = false;
 void mouseClicked() {
   kreni = true;
+  if(mouseX > width - slogan.width/2 * 1.1 - slogan.width/2 && mouseX < width - slogan.width/2 * 1.1 + slogan.width/2 && mouseY > height/2 - slogan.height/2 && mouseY < height/2 + slogan.height/2)
+    pokreniLink();
 }
 
 float easing = 0.5;

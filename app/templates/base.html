@@ -81,6 +81,9 @@ var ProcessingInit = function() {
   $(window).resize(resizeWindow);
   resizeWindow();
 }
+var pokreniLink = function() {
+  window.location.href = '{% url 'recipes' %}';
+}
 </script>
 		<script type="application/processing" data-processing-target="myCanvas" src="{% static "baloni.txt" %}"></script>
 
