@@ -24,8 +24,12 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+.container{
+
+}
+
 body > .container {
-  padding: 60px 15px 0;
+  padding: 0px 15px 0;
 }
 .container .text-muted {
   margin: 20px 0;
@@ -103,11 +107,6 @@ code {
         position: fixed;
         top: 50px;
         z-index:-1;
-}
-
-*{
-        margin: 0;
-        padding: 0;
 }
 
 .panel-image{

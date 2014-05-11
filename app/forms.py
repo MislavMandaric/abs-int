@@ -10,8 +10,8 @@ from django import forms
 from .models import Category, CustomUser
 
 class CustomAuthenticationForm(AuthenticationForm):
-  username = CharField(widget=TextInput(attrs={'class':'form-control'}))
-  password = CharField(widget=PasswordInput(attrs={'class':'form-control'}))
+  username = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Korisničko ime")
+  password = CharField(widget=PasswordInput(attrs={'class':'form-control'}), label="Lozinka")
 
 class SearchForm(forms.Form):
 	tags = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Tagovi")
