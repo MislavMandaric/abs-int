@@ -1,29 +1,22 @@
 {% extends 'base.html' %}
-{% block page_title %}Login{% endblock %}
-{% block page_header %}Login{% endblock %}
-{% block header %}{% endblock %}
+{% block page_title %}Prijava{% endblock %}
+{% block page_header %}Prijava{% endblock %}
 {% block page_body %}
 
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-4 col-md-offset-4"> 
         {% if form.errors %}
             <div class="alert alert-danger">Krivo korisničko ime ili lozinka.</div>
         {% endif %}
-        <!--<form role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
-        {% csrf_token %}
-        {% for bound_field in form %}
-            <div class="form-group">
-                {{ bound_field.label_tag }}
-                {{ bound_field }}
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-default pull-right">Prijavi me</button>
+                </form>
             </div>
-        {% endfor %}-->
-        <form class="form-signin" role="form" method="POST">
-            {% csrf_token %}
-        <h2 class="form-signin-heading">Prijava</h2>
-        <input type="text" class="form-control"  id="id_username" name="username" placeholder="Korisničko ime" required autofocus>
-        <input type="password" class="form-control" id="id_password" name="password" placeholder="Lozinka" required>
-        <button class="btn btn-lg btn-default btn-block" type="submit">Prijavi me</button>
-      </form>
+        </div>  
     </div>
 </div>
 
