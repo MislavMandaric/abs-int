@@ -55,7 +55,7 @@
 					<tbody>
 						{% for discount in users_discounts %}
 							<tr height="80px">
-								<td width="80%">{{ discount.text }}</td>
+								<td width="80%">{{ discount.text|safe }}</td>
 								<td>
 									<br>
 									<ul class="list-group">
