@@ -98,3 +98,12 @@ code {
 
 
 }
+
+.panel-image{
+    height: 230px;
+}
+
+.panel-image img{
+    max-height: 200px;
+    margin: 0 auto;
+}
