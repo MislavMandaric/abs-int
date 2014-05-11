@@ -4,14 +4,14 @@
 {% block page_header %}Dodaj novi recept{% endblock %}
 {% block page_body %}
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-6">
 			<div class="panel panel-default">
 		    <div class="panel-body">
-                <form method="POST" class="form-inline" role="form" enctype="multipart/form-data">
-                	{% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-default pull-right">Spremi</button>
-                </form>
+          <form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
+          	{% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-default pull-right">Spremi</button>
+          </form>
 			</div>
 		</div>
 	</div>

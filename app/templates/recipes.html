@@ -2,7 +2,7 @@
 {% load static %}
 {% load thumbnail %}
 {% block page_title %}Recepti{% endblock %}
-{% block page_header %}Recepti{% endblock %}
+{% block page_header %}Recepti {% if user.is_authenticated %}<a href="{% url 'recipe_create' %}" class="btn btn-default">Dodaj recept</a>{% endif %}{% endblock %}
 {% block page_body %}
 	{% for recipe in recipes %}
 		{% if forloop.counter0|divisibleby:3 %}
