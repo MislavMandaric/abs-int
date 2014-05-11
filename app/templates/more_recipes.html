@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load static %}
 {% for recipe in recipes %}
 		{% if forloop.counter0|divisibleby:3 %}
 			<div class="row">
@@ -12,7 +13,7 @@
 				        <img src="{{ im.url }}" class="img-rounded"/>
 				      {% endthumbnail %}
 				    {% else %}
-              <img src="/media/photos/noimage.jpg" width="250" height="250"/>
+              <img src="{% static 'images/noimage.jpg' %}" width="250" height="250"/>
             {% endif %}
 			</div>
 			<div class="panel-footer">{{ recipe.title }}<span class="badge pull-right">42 lajka</span></div>

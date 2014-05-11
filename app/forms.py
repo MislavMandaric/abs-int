@@ -22,7 +22,7 @@ class SearchForm(forms.Form):
 		OPTIONS = []
 		for c in categories:
 			OPTIONS.append((c.name, c.name))
-		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'checkbox'}), \
+		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control checkbox'}), \
 			choices=OPTIONS, label="Kategorije")
 
 class RecipeForm(forms.Form):
@@ -51,4 +51,4 @@ class RegistrationForm(forms.Form):
 
 
 class DiscountForm(forms.Form):
-	text = CharField(widget=Textarea(attrs={'class':'form-control'}), label="Poruka")
+	text = CharField(widget=Textarea(attrs={'class':'form-control', 'rows': 5,'cols': 35}), label="Opis")
