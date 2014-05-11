@@ -137,18 +137,16 @@ class RecipeDetailView(DetailView):
 		categories = Category.objects.filter(category_recipes__recipe=pk)
 		context['categories'] = categories
 
-		cu = CustomUser.objects.filter(user=self.request.user)
-		rp = Recipe.objects.get(id=pk)
-		if cu.exists():
-			if cu[0] == rp.user:
+		user = self.request.user
+		if user.is_authenticated():
+			custom_user = CustomUser.objects.get(user=user)
+			recipe = Recipe.objects.get(id=pk)
+			if recipe.user == custom_user or UserRecipe.objects.filter(user=custom_user, recipes__id=pk).exists():
 				is_liked = True
 			else:
-				if UserRecipe.objects.filter(user=cu[0], recipes__pk=pk).exists():
-					is_liked = True
-				else:
-					is_liked = False
-		else:	
-			is_liked = False
+				is_liked = False
+		else:
+			is_liked = True
 
 		context['is_liked'] = is_liked
 		return context
@@ -157,7 +155,7 @@ class RecipeDetailView(DetailView):
 class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
 	model = Recipe
-	
+
 	def get_queryset(self):
 		queryset = []
 		filters_categories = Q()
@@ -171,7 +169,7 @@ class RecipeSearchView(ListView):
 
 		for cat in categories:
 			if cat != 'none':
-				filters_categories |= Q(recipe_categories__categorie__name=cat)	
+				filters_categories |= Q(recipe_categories__categorie__name=cat)
 
 		filters_tags = Q()
 		if tags:
@@ -183,7 +181,7 @@ class RecipeSearchView(ListView):
 
 		if queryset.count() != 0:
 			self.result = True
-	
+
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -261,7 +259,7 @@ class MoreRecipesView(TemplateView):
 		return context
 
 class LikeView(View):
-	def post(self, *args, **kwargs):
+	def get(self, *args, **kwargs):
 		user = self.request.user
 		try:
 			custom_user = CustomUser.objects.get(user=user)
