@@ -25,12 +25,12 @@ class Recipe(models.Model):
     def __unicode__(self):
         return self.title
 
-    def like_recipe(recipe, user):
+    def like_recipe(self, user):
         try:
-            UserRecipe.objects.get(user=user, recipe=recipe)
+            UserRecipe.objects.get(user=user, recipes=self)
         except:
             # like još ne postoji
-            ur = UserRecipe(user=user, recipe=recipe)
+            ur = UserRecipe(user=user, recipes=self)
             ur.save()
 
 class Discount(models.Model):
@@ -69,7 +69,7 @@ class UserRecipe(models.Model):
     def save(self, *args, **kwargs):
         super(UserRecipe, self).save(*args, **kwargs)
         # update broja glasova u modelu Recipe
-        likes = UserRecipe.objects.filter(recipe__id=self.recipe.id)
+        likes = UserRecipe.objects.filter(recipes__id=self.recipes.id)
         rp = Recipe.objects.get(id=self.id)
         rp.likes = likes.count()
         rp.save()

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import timedelta
 
 from django.contrib.auth import authenticate, login
@@ -242,3 +244,14 @@ class MoreRecipesView(TemplateView):
 		context['more'] = more
 		context['page'] = current_page + 1
 		return context
+
+class LikeView(View):
+	def get(self, *args, **kwargs):
+		user = self.request.user
+		custom_user = CustomUser.objects.get(user=user)
+		rp_id = self.request.GET.get('id', '')
+		rp = Recipe.objects.get(id=rp_id)
+		if rp.user != custom_user:
+			rp.like_recipe(custom_user)
+
+		return HttpResponse("")
