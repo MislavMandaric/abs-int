@@ -136,6 +136,21 @@ class RecipeDetailView(DetailView):
 		context['tags'] = tags
 		categories = Category.objects.filter(category_recipes__recipe=pk)
 		context['categories'] = categories
+
+		cu = CustomUser.objects.filter(user=self.request.user)
+		rp = Recipe.objects.get(id=pk)
+		if cu.exists():
+			if cu[0] == rp.user:
+				is_liked = True
+			else:
+				if UserRecipe.objects.filter(user=cu[0], recipes__pk=pk).exists():
+					is_liked = True
+				else:
+					is_liked = False
+		else:	
+			is_liked = False
+
+		context['is_liked'] = is_liked
 		return context
 
 
