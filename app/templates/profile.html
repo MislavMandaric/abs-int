@@ -17,7 +17,7 @@
     <div class="tab-content">
         <div class="tab-pane fade in active" id="recepti">
         	<br>
-        	<a href="{% url 'recipe_create' %}" class="btn btn-default">Dodaj recept</a>
+        	<a href="{% url 'recipe_create' %}" class="btn btn-danger">Dodaj recept</a>
         	<br><br>
         	{% if users_recipes %}
 	        	{% for recipe in users_recipes %}
@@ -50,7 +50,7 @@
         </div>
         <div class="tab-pane fade" id="akcije">
         	<br>
-        	<a href="{% url 'discount_create' %}" class="btn btn-default">Dodaj akciju</a>
+        	<a href="{% url 'discount_create' %}" class="btn btn-danger">Dodaj akciju</a>
         	<br><br>
         	<table class="table table-hover"> 
 					<tbody>
