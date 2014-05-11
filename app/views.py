@@ -136,13 +136,26 @@ class RecipeDetailView(DetailView):
 		context['tags'] = tags
 		categories = Category.objects.filter(category_recipes__recipe=pk)
 		context['categories'] = categories
+
+		user = self.request.user
+		if user.is_authenticated():
+			custom_user = CustomUser.objects.get(user=user)
+			recipe = Recipe.objects.get(id=pk)
+			if recipe.user == custom_user or UserRecipe.objects.filter(user=custom_user, recipes__id=pk).exists():
+				is_liked = True
+			else:
+				is_liked = False
+		else:
+			is_liked = True
+
+		context['is_liked'] = is_liked
 		return context
 
 
 class RecipeSearchView(ListView):
 	template_name = "recipe_search.html"
 	model = Recipe
-	
+
 	def get_queryset(self):
 		queryset = []
 		filters_categories = Q()
@@ -156,7 +169,7 @@ class RecipeSearchView(ListView):
 
 		for cat in categories:
 			if cat != 'none':
-				filters_categories |= Q(recipe_categories__categorie__name=cat)	
+				filters_categories |= Q(recipe_categories__categorie__name=cat)
 
 		filters_tags = Q()
 		if tags:
@@ -168,7 +181,7 @@ class RecipeSearchView(ListView):
 
 		if queryset.count() != 0:
 			self.result = True
-	
+
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -248,7 +261,10 @@ class MoreRecipesView(TemplateView):
 class LikeView(View):
 	def get(self, *args, **kwargs):
 		user = self.request.user
-		custom_user = CustomUser.objects.get(user=user)
+		try:
+			custom_user = CustomUser.objects.get(user=user)
+		except:
+			return HttpResponse("")
 		rp_id = self.request.GET.get('id', '')
 		rp = Recipe.objects.get(id=rp_id)
 		if rp.user != custom_user:

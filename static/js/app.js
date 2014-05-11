@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
     $.get('/tagovi', function(data) {
         var options = []
         for (var i = 0; i < data.length; i++) {
@@ -27,11 +27,12 @@ $(function() {
             $("#content").append(data);
         });
     });
-});
 
-$( document ).ready(function() {
-$('#like').on( "click", function() {
-    var id = $('#rp_id').val();
-    $.ajax( '/like?id=' + String(id), { type: "GET" } );
+    $('#like').on( "click", function(event) {
+        event.preventDefault();
+        var id = $('#rp_id').val();
+        $.get('/like?id=' + String(id), function(data) {
+            $('#like').attr('disabled','disabled');
+        });
     });
 });

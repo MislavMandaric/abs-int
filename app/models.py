@@ -70,9 +70,8 @@ class UserRecipe(models.Model):
         super(UserRecipe, self).save(*args, **kwargs)
         # update broja glasova u modelu Recipe
         likes = UserRecipe.objects.filter(recipes__id=self.recipes.id)
-        rp = Recipe.objects.get(id=self.id)
-        rp.likes = likes.count()
-        rp.save()
+        self.recipes.likes = likes.count()
+        self.recipes.save()
         
 
 class RecipeCategory(models.Model):
