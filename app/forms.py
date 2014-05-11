@@ -47,7 +47,7 @@ class RegistrationForm(forms.Form):
   username = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Korisničko ime")
   password = CharField(widget=PasswordInput(attrs={'class':'form-control'}), label="Lozinka")
   password2 = CharField(widget=PasswordInput(attrs={'class':'form-control'}), label="Ponovljena lozinka")
-  image = FileField(label="Avatar", required=False)
+  image = FileField(widget=FileInput(attrs={'class':'form-control'}), label="Avatar", required=False)
 
 
 class DiscountForm(forms.Form):
