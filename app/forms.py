@@ -27,9 +27,9 @@ class SearchForm(forms.Form):
 
 class RecipeForm(forms.Form):
 	title = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Naziv")
-	text = CharField(widget=Textarea(attrs={'class':'form-control', 'rows': 10,
+	text = CharField(widget=Textarea(attrs={'class':'form-control wysihtml5', 'rows': 10,
                               'cols': 35}), label="Tekst")
-	image = FileField(widget=FileInput(attrs={'class':'form-control'}), label="Slika", required=False)
+	image = FileField(label="Slika", required=False)
 	tags = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Tagovi", required=False)
 
 	def __init__(self, *args, **kw):
@@ -51,4 +51,4 @@ class RegistrationForm(forms.Form):
 
 
 class DiscountForm(forms.Form):
-	text = CharField(widget=Textarea(attrs={'class':'form-control', 'rows': 5,'cols': 35}), label="Opis")
+	text = CharField(widget=Textarea(attrs={'class':'form-control  wysihtml5', 'rows': 5,'cols': 35}), label="Opis")
