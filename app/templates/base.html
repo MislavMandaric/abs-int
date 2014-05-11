@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>App | {% block page_title %}{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-wysihtml5-0.0.2.css' %}"></link>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'css/app_style.css' %}" rel="stylesheet">
     <link href="{% static 'css/selectize.bootstrap3.css' %}" rel="stylesheet">
+
 </head>
 <body>
 	<!-- Fixed navbar -->
@@ -65,6 +67,7 @@
 	      <p class="text-muted">&copy; abs int team, Infinum Student Hackathon 2014.</p>
 	  </div>
 	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	<script type='text/javascript'>
 $(document).ready(init);
 function init() {
@@ -78,6 +81,7 @@ var ProcessingInit = function() {
   resizeWindow();
 }
 </script>
+
 		<script type="application/processing" data-processing-target="myCanvas">
 ArrayList<Point> points = new ArrayList<Point>();
 ArrayList<Balon> baloni = new ArrayList<Balon>();
@@ -260,9 +264,12 @@ void resize(float X, float  Y) {
   size(X,250);
 }</script>
 		<script src="{% static 'js/processing-1.4.1.min.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{% static 'js/selectize.min.js' %}"></script>
+    <script src="{% static 'js/wysihtml5-0.3.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-wysihtml5-0.0.2.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
     {% block customjs %}{% endblock %}
 </body>
 </html>
