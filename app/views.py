@@ -70,7 +70,7 @@ class RecipesView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(RecipesView, self).get_context_data(**kwargs)
-		limit = 3
+		limit = 6
 		recepies = Recipe.objects.all().order_by('-date')
 		if recepies.count() > limit:
 			more = True
@@ -243,8 +243,8 @@ class MoreRecipesView(TemplateView):
 		context = super(MoreRecipesView, self).get_context_data(**kwargs)
 		recepies = Recipe.objects.all().order_by('-date')
 
-		limit = 3
-		more = 3
+		limit = 6
+		more = 6
 		limit_from = limit + more * (current_page - 1)
 		limit_to = limit_from + more
 
