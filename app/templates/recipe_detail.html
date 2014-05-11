@@ -22,7 +22,7 @@
 			  			<div class="well well-sm">Objavljeno: {{ recipe.date|date:"d.m.Y." }} u {{ recipe.date|time:"H:i" }}</div>
 			  		</div>
 			  	</div>
-					{{ recipe.text }}
+					{{ recipe.text|safe }}
 			  </div>
 			</div>
 			<ul class="list-group">
