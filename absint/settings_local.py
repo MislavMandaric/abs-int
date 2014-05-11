@@ -23,9 +23,9 @@ PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 SECRET_KEY = 'a4vn09u^vwd5qwnv(iwa^+8l6&%4%e8aj%q@@$_+ghrv5!1+^u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -106,8 +106,3 @@ LOGIN_URL = '/prijava/'
 LOGOUT_URL = '/odjava/'
 
 LOGIN_REDIRECT_URL = '/'
-
-try:
-    from settings_local import *
-except ImportError:
-    pass
