@@ -92,3 +92,9 @@ code {
   border-top-right-radius: 0;
 }
 
+#id_categories li{
+  display: inline;
+  list-style-type: none;
+
+
+}
