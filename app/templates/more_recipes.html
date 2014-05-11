@@ -7,11 +7,15 @@
 			<a href="{% url 'recipe_detail' recipe.id %}">
 			<div class="panel panel-default">
   			<div class="panel-body">
-	  				{% thumbnail recipe.image "250x250" as im %}
-			        <img src="{{ im.url }}" class="img-rounded"/>
-			      {% endthumbnail %}
+	  				{% if recipe.image %}
+			  			{% thumbnail recipe.image "250x250" as im %}
+				        <img src="{{ im.url }}" class="img-rounded"/>
+				      {% endthumbnail %}
+				    {% else %}
+              <img src="/media/photos/noimage.jpg" width="250" height="250"/>
+            {% endif %}
 			</div>
-			<div class="panel-footer">{{ recipe.title }}</div>
+			<div class="panel-footer">{{ recipe.title }}<span class="badge pull-right">42 lajka</span></div>
 			</div>
 		</a>
 		</div>

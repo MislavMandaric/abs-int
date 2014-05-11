@@ -14,7 +14,7 @@ class CustomAuthenticationForm(AuthenticationForm):
   password = CharField(widget=PasswordInput(attrs={'class':'form-control'}))
 
 class SearchForm(forms.Form):
-	tags = CharField(widget=TextInput(attrs={'class':'form-control'}))
+	tags = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Tagovi")
 
 	def __init__(self, *args, **kw):
 		super(SearchForm, self).__init__(*args, **kw)
@@ -22,8 +22,8 @@ class SearchForm(forms.Form):
 		OPTIONS = []
 		for c in categories:
 			OPTIONS.append((c.name, c.name))
-		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'form-control'}), \
-			choices=OPTIONS, label="Kategorija")
+		self.fields['categories'] = MultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class':'checkbox'}), \
+			choices=OPTIONS, label="Kategorije")
 
 class RecipeForm(forms.Form):
 	title = CharField(widget=TextInput(attrs={'class':'form-control'}), label="Naziv")
