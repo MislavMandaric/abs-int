@@ -14,6 +14,14 @@
 			{% else %}
 				<img src="{% static 'images/noimage.jpg' %}" width="250" height="250"/>
 			{% endif %}
+
+	        <div id="toreload">
+                <br/>
+                <input type="hidden" id="rp_id" name="id" value="{{recipe.id}}" />
+                <p><a href="#" id="like" class="btn btn-default btn-lg {% if is_liked %}disabled{% endif %}" role="button">
+                    <img src="{% static 'images/like.png' %}" class="like" />
+                </a></p>
+            </div>
 		</div>
 		<div class="col-md-8">
 			<div class="panel panel-default">
@@ -40,13 +48,6 @@
 			</ul>
 		</div>
 	</div>
-	
-	<div id="toreload">
-            <input type="hidden" id="rp_id" name="id" value="{{recipe.id}}" />
-            <p><a href="#" id="like" class="btn btn-default btn-lg {% if is_liked %}disabled{% endif %}" role="button">
-                <img src="{% static 'images/like.png' %}" class="like" />
-            </a></p>
-        </div>
 
 {% endblock %}
 {% block customjs %}
