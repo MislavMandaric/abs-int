@@ -28,3 +28,10 @@ $(function() {
         });
     });
 });
+
+$( document ).ready(function() {
+$('#like').on( "click", function() {
+    var id = $('#rp_id').val();
+    $.ajax( '/like?id=' + String(id), { type: "GET" } );
+    });
+});
